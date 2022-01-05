@@ -31,6 +31,7 @@ the object you'll be building.
 const Person = function (firstName, birthYear) {
   this.firstName = firstName;
   this.birthYear = birthYear;
+
   //   console.log(this);
   //   console.log(`${this.firstName} was born in ${this.birthYear}`);
 
@@ -193,11 +194,65 @@ class Dog {
   barkDecibel() {
     console.log(`A ${this.breed} is barking at ${this.age * 8} decibels!`);
   }
+
+  // create a getter for the age property:
+  get birthYear() {
+    return new Date().getFullYear() - this.age;
+  }
+
+  // create a setter for the breed property:
+  set breed(breed) {
+    if (breed.includes(` `)) this._breed = breed;
+    else console.log(`${breed} is not a valid breed!`);
+  }
+
+  // create a getter for the _breed property:
+  get breed() {
+    return this._breed;
+  }
 }
 
-// Create a new instance of the class:
+// Create a new instance of the Dog class:
 const dog = new Dog(`Golden Retriever`, 5);
 console.log(dog);
 
 // Call the barkDecibel method on the dog object:
 dog.barkDecibel();
+
+// Setters and Getters:
+console.log(`SETTERS AND GETTERS:`);
+/*
+In JavaScript, you can create a getter and a setter for a property on all
+objects. This is called "property descriptors", and these types of properties 
+are known as accessor properties. You use the "get" and "set" keywords to create 
+getters and setters.
+*/
+
+// Create an object with getters and setters:
+const bankAccount = {
+  owner: `Dan`,
+  transactions: [100, 845, 345, 436, 567, 890],
+
+  // create the getter to get the last transaction:
+  get lastTransaction() {
+    return this.transactions.slice(-1).pop();
+  },
+
+  // create the setter to add a new transaction:
+  set lastTransaction(newTransaction) {
+    this.transactions.push(newTransaction);
+  },
+};
+
+// Get the last transaction:
+console.log(bankAccount.lastTransaction);
+
+// Set a new transaction:
+bankAccount.lastTransaction = 123;
+console.log(bankAccount.transactions);
+
+// Call the getter on the dog object:
+console.log(dog.birthYear);
+
+// Create a new instance of the Dog class:
+const dog2 = new Dog(`Pug`, 2);
