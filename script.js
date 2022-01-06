@@ -222,7 +222,7 @@ dog.barkDecibel();
 // Setters and Getters:
 console.log(`SETTERS AND GETTERS:`);
 /*
-In JavaScript, you can create a getter and a setter for a property on all
+In JavaScript, you can create a "getter" and a "setter" for a properties in all
 objects. This is called "property descriptors", and these types of properties 
 are known as accessor properties. You use the "get" and "set" keywords to create 
 getters and setters.
@@ -233,7 +233,7 @@ const bankAccount = {
   owner: `Dan`,
   transactions: [100, 845, 345, 436, 567, 890],
 
-  // create the getter to get the last transaction:
+  // create a getter to get the last transaction:
   get lastTransaction() {
     return this.transactions.slice(-1).pop();
   },
@@ -256,3 +256,28 @@ console.log(dog.birthYear);
 
 // Create a new instance of the Dog class:
 const dog2 = new Dog(`Pug`, 2);
+
+// Static Methods:
+console.log(`STATIC METHODS:`);
+/*
+In JavaScript, you can create a method that is not attached to an object, but 
+rather attached to the class itself. This is called a static method. Static 
+methods are called on the class itself, not on an instance of the class.
+*/
+
+// Add a static method to the Person constructor:
+Person.greeting = function () {
+  console.log(`Howdy partner 👋🏾!! I'm a static method 🗿!!!`);
+  console.log(this);
+};
+
+// Call the static method on the Person constructor:
+Person.greeting();
+
+// Add a static method to the Dog class:
+Dog.bark = function () {
+  console.log(`The dog is barking 🐶!`);
+};
+
+// Call the static method on the Dog class:
+Dog.bark();
