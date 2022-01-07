@@ -281,3 +281,31 @@ Dog.bark = function () {
 
 // Call the static method on the Dog class:
 Dog.bark();
+
+// Object.create:
+console.log(`OBJECT.CREATE:`);
+/*
+In JavaScript, you can create an object by using the Object.create() method. 
+This method creates a new object, and sets the prototype of the new object to 
+the specified prototype object. This is a powerful way to create objects, and 
+it is often used to create objects that inherit from other objects. 
+
+So you can essentially use object.create() to manually set the prototype of 
+an object to any other object.
+*/
+
+// Create an object that will be the prototype of the Person objects:
+const personPrototype = {
+  greeting: function () {
+    console.log(`Hello, my name is ${this.name}!`);
+  },
+};
+
+// Create a new object that inherits from the personPrototype object:
+const tina = Object.create(personPrototype);
+
+// Set the name property on the tina object:
+tina.name = `Tanisha`;
+
+// Call the greeting method on the tina object:
+tina.greeting();
