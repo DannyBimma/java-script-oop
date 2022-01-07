@@ -115,7 +115,7 @@ console.log(randomArr.__proto__ === Array.prototype);
 // Coding Challenge #1
 /* 
 1. Use a constructor function to implement a Car. A car has a make and a speed property. 
-The speed property is the current speed of the car in km/h.
+The speed property is the current speed of the car in kph.
 
 2. Implement an 'accelerate' method that will increase the car's speed by 10, and log the new 
 speed to the console.
@@ -125,8 +125,8 @@ the console.
 
 4. Create 2 car objects and experiment with calling 'accelerate' and 'brake' multiple times on each of them.
 
-DATA CAR 1: 'BMW' going at 120 km/h
-DATA CAR 2: 'Mercedes' going at 95 km/h
+DATA CAR 1: 'BMW' going at 120 kph
+DATA CAR 2: 'Mercedes' going at 95 kph
 GOOD LUCK 😀
 */
 
@@ -309,3 +309,63 @@ tina.name = `Tanisha`;
 
 // Call the greeting method on the tina object:
 tina.greeting();
+
+// Coding Challenge #2
+/* 
+1. Re-create challenge 1, but this time using an ES6 class.
+
+2. Add a getter called 'speedUS' which returns the current speed in 
+mph (divide by 1.6).
+
+3. Add a setter called 'speedUS' which sets the current speed in mph 
+(but converts it to kph before storing the value, by multiplying the 
+input by 1.6).
+
+4. Create a new car and experiment with the accelerate and brake methods, 
+and with the getter and setter.
+
+DATA CAR 1: 'Ford' going at 120 kph
+GOOD LUCK 😀
+*/
+
+// 1.
+class Vehicle {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed} kph!`);
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed} kph!`);
+  }
+
+  // 2.
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+
+  // 3.
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+}
+
+// 4.
+const car1 = new Vehicle(`Ford`, 120);
+
+// Call the accelerate and brake methods on the car1 object:
+car1.accelerate();
+car1.brake();
+
+// Get the speed in mph:
+console.log(`CAR 1: ${car1.make} going at ${car1.speedUS} mph`);
+
+// Set the speed in mph:
+car1.speedUS = 120;
+console.log(car1);
