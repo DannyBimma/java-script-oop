@@ -370,8 +370,8 @@ console.log(`CAR 1: ${car1.make} going at ${car1.speedUS} mph`);
 car1.speedUS = 120;
 console.log(car1);
 
-// Inheritance Between Classes:
-console.log(`INHERITANCE BETWEEN CLASSES:`);
+// Inheritance Between Classes: Constructor Functions:
+console.log(`INHERITANCE BETWEEN CLASSES: CONSTRUCTOR FUNCTIONS:`);
 /*
 In JavaScript, you can create a class that inherits from another class.
 */
@@ -467,3 +467,70 @@ BMW.accelerate();
 BMW.brake();
 BMW.chargeBattery(90);
 BMW.accelerate();
+
+// Inheritance Between Classes: ES6 Classes:
+console.log(`INHERITANCE BETWEEN CLASSES: ES6 CLASSES:`);
+
+// Create a class declaration:
+class Human {
+  // create the constructor method:
+  constructor(govName, birthYear) {
+    this.govName = govName;
+    this.birthYear = birthYear;
+  }
+  // create the age instance method:
+  calcAge() {
+    console.log(`${new Date().getFullYear() - this.birthYear}`);
+  }
+
+  greeting() {
+    console.log(`Hello ${this.govName}, what is really good?`);
+  }
+
+  // create a getter for the age method:
+  get age() {
+    return new Date().getFullYear() - this.birthYear;
+  }
+
+  // create a setter for the govName property:
+  set govName(name) {
+    if (name.includes(` `)) this._govName = name;
+    else
+      console.log(
+        `❌ERROR❌: "${name}" is not a valid Government sanctioned name!`
+      );
+  }
+
+  // create a getter for the _govName property:
+  get govName() {
+    return this._govName;
+  }
+
+  // create a static greeting method:
+  static greet() {
+    console.log(`${this.govName}, we've been expecting you!`);
+  }
+}
+
+// Create a Student class:
+class Hero extends Human {
+  constructor(govName, birthYear, heroName) {
+    super(govName, birthYear);
+    this.heroName = heroName;
+  }
+
+  introduction() {
+    console.log(
+      `My name is ${this.govName}, but my hero name is ${this.heroName}!!`
+    );
+  }
+}
+
+const bakugo = new Hero(
+  `Katsuki Bakugo`,
+  2006,
+  `Great Explosion Murder God Dynamight`
+);
+
+bakugo.introduction();
+bakugo.calcAge();
