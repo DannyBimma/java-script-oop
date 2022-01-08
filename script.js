@@ -478,11 +478,12 @@ class Human {
     this.govName = govName;
     this.birthYear = birthYear;
   }
-  // create the age instance method:
+  // create the calcAge instance method:
   calcAge() {
     console.log(`${new Date().getFullYear() - this.birthYear}`);
   }
 
+  // create greeting method:
   greeting() {
     console.log(`Hello ${this.govName}, what is really good?`);
   }
@@ -512,13 +513,16 @@ class Human {
   }
 }
 
-// Create a Student class:
+// Create a Student class that inherits from the Human class:
 class Hero extends Human {
   constructor(govName, birthYear, heroName) {
+    // set the "this" keyword from the parent class:
     super(govName, birthYear);
+    // set the "this" keyword:
     this.heroName = heroName;
   }
 
+  // create introduction method:
   introduction() {
     console.log(
       `My name is ${this.govName}, but my hero name is ${this.heroName}!!`
@@ -526,11 +530,55 @@ class Hero extends Human {
   }
 }
 
+// Create a new Hero object:
 const bakugo = new Hero(
   `Katsuki Bakugo`,
   2006,
   `Great Explosion Murder God Dynamight`
 );
 
+// Call the introduction method on bakugo:
 bakugo.introduction();
+
+// Call the calcAge method on bakugo:
 bakugo.calcAge();
+
+// Inheritance Between Classes: Object.create:
+console.log(`INHERITANCE BETWEEN CLASSES: OBJECT.CREATE:`);
+
+// Create a prototype object:
+const shipPrototype = {
+  pingMsg: function () {
+    console.log(
+      `You have made radio contact with M.Y. ${this.shipName}, please state your business!`
+    );
+  },
+
+  shipID(shipName, flag, regNum) {
+    this.shipName = shipName;
+    this.flag = flag;
+    this.regNum = regNum;
+  },
+};
+
+// Create a new ship object:
+const eclipse = Object.create(shipPrototype);
+
+// Create a new yacht prototype:
+const yachtPrototype = Object.create(shipPrototype);
+
+// Add a shipID method to yachtPrototype:
+yachtPrototype.shipID = function (shipName, flag, regNum, category) {
+  shipPrototype.shipID.call(this, shipName, flag, regNum);
+  this.category = category;
+};
+
+// Create a new yacht object:
+const kingdomCome = Object.create(yachtPrototype);
+
+// Call the ship ID method on kingdomCome:
+kingdomCome.shipID(`Kingdom Come`, `🇧🇧`, 246, `Private Yacht`);
+console.log(kingdomCome);
+
+// Call the pingMsg method on kingdomCome:
+kingdomCome.pingMsg();
