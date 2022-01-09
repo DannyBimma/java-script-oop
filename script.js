@@ -609,10 +609,14 @@ class Account {
   // create withdrawal & deposit methods:
   deposit(amt) {
     this._transactions.push(amt);
+    // return .this to make the method "chain-able":
+    return this;
   }
 
   withdrawal(amt) {
     this.deposit(-amt);
+    // return .this to make the method "chain-able":
+    return this;
   }
 
   // create loan approval method:
@@ -628,6 +632,8 @@ class Account {
         `Congrats ${this.owner}! Your loan totalling ${amt} has been fully approved and instantly deposited to your account.`
       );
     }
+    // return .this to make the method "chain-able":
+    return this;
   }
 
   // Create a method to read the transactions:
@@ -649,6 +655,15 @@ acc0.loanReq(420000);
 
 // Simulate transactions display:
 console.log(acc0.readTrans());
+
+// Chain the "chain-able" methods:
+acc0
+  .deposit(400000)
+  .withdrawal(840)
+  .loanReq(840200)
+  .withdrawal(240)
+  .withdrawal(50)
+  .deposit(100);
 
 console.log(acc0);
 
@@ -673,3 +688,16 @@ console.log(`ENCAPSULATION: PRIVATE PROPERTIES AND METHODS:`);
 /*
 Research JavaScript Class Fields proposal!
 */
+
+// Chaining Methods:
+console.log(`CHAINING METHODS:`);
+/*
+When using Array methods you can make use of chaining methods. This allows
+you to do things like calling the filter, map, and reduce methods in a single 
+operation. 
+
+Essentially the same concept can be applied to the methods in a class! In order
+to achieve this all you need to do is return the object itself at the end of a 
+method that you want to be "chain-able."
+*/
+console.log(acc0.readTrans());
