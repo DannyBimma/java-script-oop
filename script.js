@@ -591,9 +591,11 @@ class Account {
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
+    // encapsulate(protected) pin:
     this.pin = pin;
     this.bank = `Black Billionaires Financial`;
-    this.transactions = [];
+    // encapsulate(protected) transactions data:
+    this._transactions = [];
     this.locale = navigator.language;
 
     // account greetings:
@@ -603,10 +605,10 @@ class Account {
     console.log(`This in this block of code is pointing to ${this}`);
   }
 
-  // (The Public Interface of thr Objects (API)):
+  // (The Public Interface of thr Objects (PI)):
   // create withdrawal & deposit methods:
   deposit(amt) {
-    this.transactions.push(amt);
+    this._transactions.push(amt);
   }
 
   withdrawal(amt) {
@@ -614,18 +616,23 @@ class Account {
   }
 
   // create loan approval method:
-  loanApproval(amt) {
+  _loanApproval(amt) {
     return true;
   }
 
   // create loan request method:
   loanReq(amt) {
-    if (this.loanApproval(amt) === true) {
+    if (this._loanApproval(amt) === true) {
       this.deposit(amt);
       console.log(
         `Congrats ${this.owner}! Your loan totalling ${amt} has been fully approved and instantly deposited to your account.`
       );
     }
+  }
+
+  // Create a method to read the transactions:
+  readTrans() {
+    return this._transactions;
   }
 }
 
@@ -640,4 +647,29 @@ acc0.withdrawal(1800);
 // Simulate a loan request:
 acc0.loanReq(420000);
 
+// Simulate transactions display:
+console.log(acc0.readTrans());
+
 console.log(acc0);
+
+// Encapsulation: Protected Properties and Methods:
+console.log(`ENCAPSULATION: PROTECTED PROPERTIES AND METHODS:`);
+/*
+When working with object oriented programing in JavaScript. It's essential
+to learn data protection best practices when allowing interaction with 
+objects containing sensitive data.
+
+Encapsulation achieves this by making some properties and methods private in
+a class so they can't be accessed from outside the class. 
+*/
+
+// Anyone or code trying to manipulate the property without the _
+// will get an error
+
+// acc0.transactions.push(-100);
+
+// Encapsulation: PrivateProperties and Methods:
+console.log(`ENCAPSULATION: PRIVATE PROPERTIES AND METHODS:`);
+/*
+Research JavaScript Class Fields proposal!
+*/
