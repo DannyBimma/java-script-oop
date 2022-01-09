@@ -582,3 +582,62 @@ console.log(kingdomCome);
 
 // Call the pingMsg method on kingdomCome:
 kingdomCome.pingMsg();
+
+// More ES6 Class Examples:
+console.log(`MORE ES6 CLASS EXAMPLES:`);
+
+// Create a bank account class:
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.bank = `Black Billionaires Financial`;
+    this.transactions = [];
+    this.locale = navigator.language;
+
+    // account greetings:
+    console.log(
+      `A grand welcome ${this.owner}. It's an honor to have you fucking with us here at ${this.bank}✊🏾!!`
+    );
+    console.log(`This in this block of code is pointing to ${this}`);
+  }
+
+  // (The Public Interface of thr Objects (API)):
+  // create withdrawal & deposit methods:
+  deposit(amt) {
+    this.transactions.push(amt);
+  }
+
+  withdrawal(amt) {
+    this.deposit(-amt);
+  }
+
+  // create loan approval method:
+  loanApproval(amt) {
+    return true;
+  }
+
+  // create loan request method:
+  loanReq(amt) {
+    if (this.loanApproval(amt) === true) {
+      this.deposit(amt);
+      console.log(
+        `Congrats ${this.owner}! Your loan totalling ${amt} has been fully approved and instantly deposited to your account.`
+      );
+    }
+  }
+}
+
+// Create a new account object:
+const acc0 = new Account(`DannyBimma`, `BDS`, 1246);
+
+// Simulate deposits and withdrawals:
+acc0.deposit(8000);
+acc0.deposit(4800);
+acc0.withdrawal(1800);
+
+// Simulate a loan request:
+acc0.loanReq(420000);
+
+console.log(acc0);
