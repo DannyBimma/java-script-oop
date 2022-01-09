@@ -338,11 +338,13 @@ class Vehicle {
   accelerate() {
     this.speed += 10;
     console.log(`${this.make} is going at ${this.speed} kph!`);
+    return this;
   }
 
   brake() {
     this.speed -= 5;
     console.log(`${this.make} is going at ${this.speed} kph!`);
+    return this;
   }
 
   // 2.
@@ -701,3 +703,58 @@ to achieve this all you need to do is return the object itself at the end of a
 method that you want to be "chain-able."
 */
 console.log(acc0.readTrans());
+
+// Coding Challenge #4
+console.log(`CODING CHALLENGE #4:`);
+/* 
+1. Re-create challenge #3, but this time using ES6 classes: 
+(create an 'EV' class child class of the 'Vehicle' class).
+
+2. Make the 'charge' property private.
+
+3. Implement the ability to chain the 'accelerate' and 'chargeBattery' methods 
+of this class, and also update the 'brake' method in the 'Vehicle' class. 
+Then experiment with chaining!
+
+DATA CAR 1: 'Rimac C2' going at 120 km/h, with a charge of 23%
+GOOD LUCK 😀
+*/
+
+// 1. - 2.
+class EV1 extends Vehicle {
+  constructor(make, speed, _charge) {
+    super(make, speed);
+    this._charge = _charge;
+  }
+
+  // Create the charge battery method:
+  chargeTo(chargeTo) {
+    this._charge = chargeTo;
+    return this;
+  }
+
+  // Create the accelerate method:
+  accelerate() {
+    this.speed += 20;
+    this._charge -= 1;
+    console.log(
+      `This ${this.make} is travelling at ${this.speed}kph with a charge of ${this._charge}%!`
+    );
+    return this;
+  }
+}
+
+// 3.
+const rimacC2 = new EV1(`Rimac C2`, 220, 23);
+
+rimacC2
+  .accelerate()
+  .accelerate()
+  .accelerate()
+  .accelerate()
+  .brake()
+  .brake()
+  .chargeTo(50)
+  .accelerate();
+
+console.log(rimacC2);
